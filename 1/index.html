@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<title>Villa Interior – Living Room</title>
+
+<link rel="stylesheet"
+href="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.css"/>
+
+<link rel="stylesheet" href="style.css">
+
+<script src="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.js"></script>
+
+</head>
+
+<body>
+
+<div id="panorama"></div>
+
+<div class="space-bar">
+Living Room – Villa Interior
+</div>
+
+
+<div class="ui-buttons">
+
+<button onclick="toggleGyro()" title="AR Mode">📱</button>
+
+<button onclick="enterVR()" title="VR Mode">🥽</button>
+
+<button onclick="openFullscreen()" title="Fullscreen">⛶</button>
+
+</div>
+
+
+<script>
+
+var viewer = pannellum.viewer('panorama', {
+
+"type": "equirectangular",
+"panorama": "LIV27.png",
+"autoLoad": true,
+"friction": 0.5,
+"showFullscreenCtrl": false
+
+});
+
+
+function openFullscreen(){
+document.documentElement.requestFullscreen();
+}
+
+
+function toggleGyro(){
+
+if(viewer.isOrientationActive()){
+viewer.stopOrientation();
+}
+else{
+viewer.startOrientation();
+}
+
+}
+
+
+function enterVR(){
+
+viewer.startOrientation();
+
+document.documentElement.requestFullscreen();
+
+}
+
+</script>
+
+</body>
+</html>
