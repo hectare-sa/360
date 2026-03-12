@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+
 <meta charset="UTF-8">
 <title>Villa Interior – Living Room</title>
 
@@ -22,17 +23,15 @@ href="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.css"/>
 Living Room – Villa Interior
 </div>
 
-
 <div class="ui-buttons">
 
-<button onclick="toggleGyro()" title="AR Mode">📱</button>
+<button onclick="arMode()">📱</button>
 
-<button onclick="enterVR()" title="VR Mode">🥽</button>
+<button onclick="vrMode()">🥽</button>
 
-<button onclick="openFullscreen()" title="Fullscreen">⛶</button>
+<button onclick="openFullscreen()">⛶</button>
 
 </div>
-
 
 <script>
 
@@ -41,34 +40,45 @@ var viewer = pannellum.viewer('panorama', {
 "type": "equirectangular",
 "panorama": "LIV27.png",
 "autoLoad": true,
-"friction": 0.15,
+"friction": 0.5,
 "showFullscreenCtrl": false
 
 });
 
 
+/* FULLSCREEN WORKING */
+
 function openFullscreen(){
-document.documentElement.requestFullscreen();
+
+var elem = document.getElementById("panorama");
+
+if (elem.requestFullscreen) {
+elem.requestFullscreen();
+} 
+else if (elem.webkitRequestFullscreen) {
+elem.webkitRequestFullscreen();
+} 
+else if (elem.msRequestFullscreen) {
+elem.msRequestFullscreen();
+}
+
 }
 
 
-function toggleGyro(){
+/* DUMMY AR BUTTON */
 
-if(viewer.isOrientationActive()){
-viewer.stopOrientation();
-}
-else{
-viewer.startOrientation();
-}
+function arMode(){
+
+console.log("AR button clicked");
 
 }
 
 
-function enterVR(){
+/* DUMMY VR BUTTON */
 
-viewer.startOrientation();
+function vrMode(){
 
-document.documentElement.requestFullscreen();
+console.log("VR button clicked");
 
 }
 
