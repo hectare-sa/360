@@ -3,7 +3,7 @@
 
 <head>
 <meta charset="UTF-8">
-<title>Villa Interior 360</title>
+<title>Villa Interior – Living Room</title>
 
 <link rel="stylesheet"
 href="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.css"/>
@@ -16,44 +16,57 @@ href="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.css"/>
 
 <body>
 
-<!-- START SCREEN -->
-
-<div id="startScreen">
-
-<button id="startBtn" onclick="startViewer()">
-ENTER 360 VIEW
-</button>
-
-</div>
-
-
-<!-- PANORAMA -->
-
 <div id="panorama"></div>
-
-
-<!-- SPACE NAME -->
 
 <div class="space-bar">
 Living Room – Villa Interior
 </div>
 
 
+<div class="ui-buttons">
+
+<button onclick="toggleGyro()" title="AR Mode">📱</button>
+
+<button onclick="enterVR()" title="VR Mode">🥽</button>
+
+<button onclick="openFullscreen()" title="Fullscreen">⛶</button>
+
+</div>
+
+
 <script>
 
-function startViewer(){
-
-document.getElementById("startScreen").style.display = "none";
-
-pannellum.viewer('panorama', {
+var viewer = pannellum.viewer('panorama', {
 
 "type": "equirectangular",
 "panorama": "LIV27.png",
 "autoLoad": true,
-"showFullscreenCtrl": true,
-"friction": 0.5
+"friction": 0.15,
+"showFullscreenCtrl": false
 
 });
+
+
+function openFullscreen(){
+document.documentElement.requestFullscreen();
+}
+
+
+function toggleGyro(){
+
+if(viewer.isOrientationActive()){
+viewer.stopOrientation();
+}
+else{
+viewer.startOrientation();
+}
+
+}
+
+
+function enterVR(){
+
+viewer.startOrientation();
 
 document.documentElement.requestFullscreen();
 
