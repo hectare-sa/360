@@ -33,7 +33,36 @@ Living Room – Villa Interior
 
 </div>
 
-<script>
+
+
+
+  <script>
+
+var viewer = pannellum.viewer('panorama', {
+"type": "equirectangular",
+"panorama": "LIV27.png",
+"autoLoad": true,
+"friction": 0.5,
+"showFullscreenCtrl": false
+});
+
+
+function openFullscreen() {
+
+var elem = document.getElementById("panorama");
+
+if (elem.requestFullscreen) {
+elem.requestFullscreen();
+} else if (elem.webkitRequestFullscreen) {
+elem.webkitRequestFullscreen();
+} else if (elem.msRequestFullscreen) {
+elem.msRequestFullscreen();
+}
+
+}
+
+
+
 function toggleGyro() {
 
 if (viewer.isOrientationActive()) {
@@ -77,6 +106,7 @@ toggleGyro();
 </body>
 
 </html>
+
 
 
 
