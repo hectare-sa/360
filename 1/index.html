@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+rev1<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -34,46 +34,47 @@ Living Room – Villa Interior
 </div>
 
 
-<script>
+function toggleGyro() {
 
-var viewer = pannellum.viewer('panorama', {
-
-"type": "equirectangular",
-"panorama": "LIV2.png",
-"autoLoad": true,
-"friction": 0.15,
-"showFullscreenCtrl": false
-
-});
-
-
-function openFullscreen(){
-document.documentElement.requestFullscreen();
-}
-
-
-function toggleGyro(){
-
-if(viewer.isOrientationActive()){
+if (viewer.isOrientationActive()) {
 viewer.stopOrientation();
 }
-else{
+else {
+
+if (typeof DeviceOrientationEvent !== "undefined" &&
+typeof DeviceOrientationEvent.requestPermission === "function") {
+
+DeviceOrientationEvent.requestPermission()
+.then(function(response) {
+if (response == "granted") {
 viewer.startOrientation();
+}
+})
+.catch(console.error);
+
+}
+else {
+
+viewer.startOrientation();
+
 }
 
 }
 
+}
 
-function enterVR(){
 
-viewer.startOrientation();
 
-document.documentElement.requestFullscreen();
+function enterVR() {
+
+openFullscreen();
+toggleGyro();
 
 }
 
 </script>
-
+  
 </body>
 
 </html>
+
