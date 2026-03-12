@@ -3,7 +3,7 @@
 
 <head>
 <meta charset="UTF-8">
-<title>Villa Interior – Living Room</title>
+<title>Villa Interior 360</title>
 
 <link rel="stylesheet"
 href="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.css"/>
@@ -16,97 +16,50 @@ href="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.css"/>
 
 <body>
 
+<!-- START SCREEN -->
+
+<div id="startScreen">
+
+<button id="startBtn" onclick="startViewer()">
+ENTER 360 VIEW
+</button>
+
+</div>
+
+
+<!-- PANORAMA -->
+
 <div id="panorama"></div>
+
+
+<!-- SPACE NAME -->
 
 <div class="space-bar">
 Living Room – Villa Interior
 </div>
 
 
-<div class="ui-buttons">
+<script>
 
-<button onclick="toggleGyro()" title="AR Mode">📱</button>
+function startViewer(){
 
-<button onclick="enterVR()" title="VR Mode">🥽</button>
+document.getElementById("startScreen").style.display = "none";
 
-<button onclick="openFullscreen()" title="Fullscreen">⛶</button>
+pannellum.viewer('panorama', {
 
-</div>
-
-
-
-
-  <script>
-
-var viewer = pannellum.viewer('panorama', {
 "type": "equirectangular",
 "panorama": "LIV27.png",
 "autoLoad": true,
-"friction": 0.5,
-"showFullscreenCtrl": false
+"showFullscreenCtrl": true,
+"friction": 0.5
+
 });
 
-
-function openFullscreen() {
-
-var elem = document.getElementById("panorama");
-
-if (elem.requestFullscreen) {
-elem.requestFullscreen();
-} else if (elem.webkitRequestFullscreen) {
-elem.webkitRequestFullscreen();
-} else if (elem.msRequestFullscreen) {
-elem.msRequestFullscreen();
-}
-
-}
-
-
-
-function toggleGyro() {
-
-if (viewer.isOrientationActive()) {
-viewer.stopOrientation();
-}
-else {
-
-if (typeof DeviceOrientationEvent !== "undefined" &&
-typeof DeviceOrientationEvent.requestPermission === "function") {
-
-DeviceOrientationEvent.requestPermission()
-.then(function(response) {
-if (response == "granted") {
-viewer.startOrientation();
-}
-})
-.catch(console.error);
-
-}
-else {
-
-viewer.startOrientation();
-
-}
-
-}
-
-}
-
-
-
-function enterVR() {
-
-openFullscreen();
-toggleGyro();
+document.documentElement.requestFullscreen();
 
 }
 
 </script>
-  
+
 </body>
-
 </html>
-
-
-
-
